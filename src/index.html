@@ -1,14 +1,97 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <meta charset="utf-8">
-    <title>Caesar Cipher</title>
+    <title>Cifrador Cesar</title>
     <link rel="stylesheet" href="style.css" />
   </head>
+
+
   <body>
-    <div id="root">
-      <h1>Hello world!</h1>
-    </div>
-    <script src="index.js" type="module"></script>
+
+      <main>
+          <h1>Cifrador Cesar</h1>
+          <form id="input" autocomplete="off">
+              <input id="originalInput" spellcheck="false" placeholder="Ingrese el texto" type="text" name="text">
+          </form>
+          <div id="results"></div>
+
+          <div class="offset">
+              <input id="rango" type="range" value="10" min="1" max="20" oninput="this.nextElementSibling.value = this.value">
+              <output>10</output>
+          </div>
+          <button type="button" onclick="display()">Cifrar</button>
+          <div class="Webview">
+
+            <div class="finalOutput" id="myForm"></div>
+            <form class="send_container">
+              <input id="text" type="text" value= "finalOutput" />
+            </form>
+          </div>
+    
+
+      </main>
+    <!--aquí script que debo borrar despues-->
+      <script>
+
+
+//const cipher = {
+
+//hay un input
+//var input = document.getElementById('originalInput').value;
+var input = 'HOLA'
+var toAscii = [];
+//pasalo a ascii
+for(let i = 0;
+  i < input.length;
+  i++){
+  toAscii.push(input.charCodeAt(i));
+}
+//definir variables
+var result = [];
+var encodes = true;
+var offset = 3
+var cipherResult = [];
+//si cifras encode o si descifras decode
+if(encodes = true){
+for(let i = 0;
+  i < toAscii.length;
+  i++)
+    { character = toAscii[i]
+      cipherChar = (((character - 65 + offset) % 26) + 65);
+      cipherResult.push(cipherChar)
+    }
+    } else {
+      for(let i = 0;
+        i < toAscii.length;
+        i++)
+          { character = toAscii[i]
+            cipherChar = (((character - 65 - offset) % 26) + 65);
+            //guarda los caracteres en cipherResult
+            cipherResult.push(cipherChar)
+          }
+    }
+
+
+//pasa a unicode
+//var output = String.fromCharCode(cipherResult);
+var output = String.fromCharCode.apply(null, cipherResult)
+//prueba
+console.log(toAscii);
+console.log(cipherResult);
+console.log(output);
+//};
+
+//export default cipher;
+
+//muestra resultado
+const display = () => {
+  const cajita = document.getElementsByClassName('finalOutput')[0];
+  cajita.innerHTML = output;
+}
+      </script>
+
+    
   </body>
 </html>
