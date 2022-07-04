@@ -1,97 +1,85 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Cifrador Cesar</title>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
 
-  <head>
-    <meta charset="utf-8">
-    <title>Cifrador Cesar</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
+    <body>
+        <main>
+            <h1>Cifrador Cesar</h1>
 
-
-  <body>
-
-      <main>
-          <h1>Cifrador Cesar</h1>
-          <form id="input" autocomplete="off">
-              <input id="originalInput" spellcheck="false" placeholder="Ingrese el texto" type="text" name="text">
-          </form>
-          <div id="results"></div>
-
-          <div class="offset">
-              <input id="rango" type="range" value="10" min="1" max="20" oninput="this.nextElementSibling.value = this.value">
-              <output>10</output>
-          </div>
-          <button type="button" onclick="display()">Cifrar</button>
-          <div class="Webview">
-
-            <div class="finalOutput" id="myForm"></div>
-            <form class="send_container">
-              <input id="text" type="text" value= "finalOutput" />
+            <form id="input" autocomplete="off">
+                <input id="originalInput" spellcheck="false" placeholder="Ingrese el texto" type="textarea" name="text" />
             </form>
-          </div>
-    
 
-      </main>
-    <!--aquí script que debo borrar despues-->
-      <script>
+            <button type="button" onclick="cipher()">Cifrar</button>
 
+            <button type="button" onclick="decode()">Descifrar</button>
 
-//const cipher = {
+                <form class="send_container">
+                    <input id="este" type="textarea" placeholder="Cifrado aquí" />
+                </form>
+        </main>
+        <!--aquí script que debo borrar despues-->
+        <script>
+            // const cipher = {
+            //hay un input
+            var encodes = true;
 
-//hay un input
-//var input = document.getElementById('originalInput').value;
-var input = 'HOLA'
-var toAscii = [];
-//pasalo a ascii
-for(let i = 0;
-  i < input.length;
-  i++){
-  toAscii.push(input.charCodeAt(i));
-}
-//definir variables
-var result = [];
-var encodes = true;
-var offset = 3
-var cipherResult = [];
-//si cifras encode o si descifras decode
-if(encodes = true){
-for(let i = 0;
-  i < toAscii.length;
-  i++)
-    { character = toAscii[i]
-      cipherChar = (((character - 65 + offset) % 26) + 65);
-      cipherResult.push(cipherChar)
-    }
-    } else {
-      for(let i = 0;
-        i < toAscii.length;
-        i++)
-          { character = toAscii[i]
-            cipherChar = (((character - 65 - offset) % 26) + 65);
-            //guarda los caracteres en cipherResult
-            cipherResult.push(cipherChar)
-          }
-    }
+            const decode = () => {
+                encodes = false;
+                cipher();
+            };
 
+            const cipher = () => {
+                // document.getElementById('originalInput').value = input;
 
-//pasa a unicode
-//var output = String.fromCharCode(cipherResult);
-var output = String.fromCharCode.apply(null, cipherResult)
-//prueba
-console.log(toAscii);
-console.log(cipherResult);
-console.log(output);
-//};
+                var input = document.getElementById("originalInput").value;
+                var toAscii = [];
+                //pasalo a ascii
+                for (let i = 0; i < input.length; i++) {
+                    toAscii.push(input.charCodeAt(i));
+                }
+                //definir variables
+                var result = [];
+                var offset = 3;
+                var cipherResult = [];
+                //si cifras encode o si descifras decode
+                if (encodes) {
+                    for (let i = 0; i < toAscii.length; i++) {
+                        character = toAscii[i];
+                        cipherChar = ((character - 65 + offset) % 26) + 65;
+                        cipherResult.push(cipherChar);
+                    }
+                } else {
+                    for (let i = 0; i < toAscii.length; i++) {
+                        character = toAscii[i];
+                        cipherChar = ((character - 65 - offset) % 26) + 65;
+                        //guarda los caracteres en cipherResult
+                        cipherResult.push(cipherChar);
+                    }
+                }
 
-//export default cipher;
+                //pasa a unicode
+                //var output = String.fromCharCode(cipherResult);
+                var output = String.fromCharCode.apply(null, cipherResult);
+                //prueba
+                console.log(toAscii);
+                console.log(cipherResult);
+                console.log(output);
 
-//muestra resultado
-const display = () => {
-  const cajita = document.getElementsByClassName('finalOutput')[0];
-  cajita.innerHTML = output;
-}
-      </script>
+                //export default cipher;
 
-    
-  </body>
+                //muestra resultado
+
+                //const cajita = document.getElementsByClassName('send_container')[0];
+                //cajita.innerHTML = output;
+                //esta linea pone el valor de la variable output adentro de la caja de texto
+                document.getElementById("este").value = output;
+            };
+        </script>
+    </body>
 </html>
