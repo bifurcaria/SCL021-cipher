@@ -1,48 +1,35 @@
-
-//const cipher = {
-
-//hay un input
-var input = document.getElementById('originalInput');
-var toAscii = [];
-//pasalo a ascii
-for(let i = 0;
-  i < input.length;
-  i++){
-  toAscii.push(input.charCodeAt(i));
+const cipher = {
+  encode: function(offset, string) {
+    var output = [];
+    var result;
+    for (let i = 0; i < string.length; i++) {
+      //mayusculas
+      if (90 >= string.charCodeAt(i) && string.charCodeAt(i) >= 65) {
+        result = (string.charCodeAt(i) - 65 + offset) % 26;
+        //verifica que result sea válido
+        result = result >= 0 ? result : result + 26;
+        output[i] = result + 65;
+        //minusculas
+      } else if (122 >= string.charCodeAt(i) && string.charCodeAt(i) >= 97) {
+        result = (string.charCodeAt(i) - 97 + offset) % 26;
+        //verifica que result sea válido
+        result = result >= 0 ? result : result + 26;
+        output[i] = result + 97;
+        //devuelve el mismo caracter si no son letras
+      } else {
+        output[i] = string.charCodeAt(i);
+      }
+    }
+    return String.fromCharCode.apply(null, output);
+  },
+  decode: function(offset, string) {
+    //lo mismo pero con offset negativo
+    return this.encode(-offset, string);
+  }
 }
-//definir variables
-var result = [];
-var encodes = true;
-var offset = 3
-var cipherResult = [];
-//si cifras encode o si descifras decode
-if(encodes = true){
-for(let i = 0;
-  i < toAscii.length;
-  i++)
-    { character = toAscii[i]
-      cipherChar = (((character - 65 + offset) % 26) + 65);
-      cipherResult.push(cipherChar)
-    }
-    } else {
-      for(let i = 0;
-        i < toAscii.length;
-        i++)
-          { character = toAscii[i]
-            cipherChar = (((character - 65 - offset) % 26) + 65);
-            cipherResult.push(cipherChar)
-          }
-    }
 
+export default cipher;
 
-//pasalo a unicode
-//var output = String.fromCharCode(cipherResult);
-var output = String.fromCharCode.apply(null, cipherResult)
-//prueba
-console.log(toAscii);
-console.log(cipherResult);
-console.log(output);
-//};
-
-
-//export default cipher;
+      /* var result: si 65 + offset > charCode, el valor entre paréntesis es negativo
+      negativo no es válido: no indica posición de caracter en abecedario -entre 0 y 25-
+      suma 26 para que, al sumar 65, devuelva ascii válido -entre 65 y 90-*/

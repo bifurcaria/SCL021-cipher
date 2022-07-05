@@ -1,85 +1,43 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Cifrador Cesar</title>
-        <link rel="stylesheet" href="style.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    </head>
+  <head>
+    <meta charset="utf-8" />
+    <title>Cifrador Cesar</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="index.js" type="module"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+  </head>
 
-    <body>
-        <main>
-            <h1>Cifrador Cesar</h1>
+  <body>
+    <div class="container">
+      
+      <div class="row justify-content-center">
+        <h1>Cifrador Cesar</h1>
+      </div>
 
-            <form id="input" autocomplete="off">
-                <input id="originalInput" spellcheck="false" placeholder="Ingrese el texto" type="textarea" name="text" />
-            </form>
+      <div class="row justify-content-center align-items-center">
+        <div class="col-sm-6">
+          <input id="input" placeholder="Ingrese el texto" class="form-control">
+        </div>
+        <div class="col-sm-6">
+          <input id="output" placeholder="Texto cifrado" class="form-control">
+        </div>
+      </div>
 
-            <button type="button" onclick="cipher()">Cifrar</button>
+      <div class="row justify-content-center align-items-center">
+        <div class="col-sm-6">
+        <button type="button" id="cifrar">Cifrar</button>
+        </div>
+        <div class="col-sm-6">
+        <button type="button" id="descifrar">Descifrar</button>
+        </div>
+      </div>
 
-            <button type="button" onclick="decode()">Descifrar</button>
-
-                <form class="send_container">
-                    <input id="este" type="textarea" placeholder="Cifrado aquí" />
-                </form>
-        </main>
-        <!--aquí script que debo borrar despues-->
-        <script>
-            // const cipher = {
-            //hay un input
-            var encodes = true;
-
-            const decode = () => {
-                encodes = false;
-                cipher();
-            };
-
-            const cipher = () => {
-                // document.getElementById('originalInput').value = input;
-
-                var input = document.getElementById("originalInput").value;
-                var toAscii = [];
-                //pasalo a ascii
-                for (let i = 0; i < input.length; i++) {
-                    toAscii.push(input.charCodeAt(i));
-                }
-                //definir variables
-                var result = [];
-                var offset = 3;
-                var cipherResult = [];
-                //si cifras encode o si descifras decode
-                if (encodes) {
-                    for (let i = 0; i < toAscii.length; i++) {
-                        character = toAscii[i];
-                        cipherChar = ((character - 65 + offset) % 26) + 65;
-                        cipherResult.push(cipherChar);
-                    }
-                } else {
-                    for (let i = 0; i < toAscii.length; i++) {
-                        character = toAscii[i];
-                        cipherChar = ((character - 65 - offset) % 26) + 65;
-                        //guarda los caracteres en cipherResult
-                        cipherResult.push(cipherChar);
-                    }
-                }
-
-                //pasa a unicode
-                //var output = String.fromCharCode(cipherResult);
-                var output = String.fromCharCode.apply(null, cipherResult);
-                //prueba
-                console.log(toAscii);
-                console.log(cipherResult);
-                console.log(output);
-
-                //export default cipher;
-
-                //muestra resultado
-
-                //const cajita = document.getElementsByClassName('send_container')[0];
-                //cajita.innerHTML = output;
-                //esta linea pone el valor de la variable output adentro de la caja de texto
-                document.getElementById("este").value = output;
-            };
-        </script>
-    </body>
+    </div>
+  </body>
 </html>
