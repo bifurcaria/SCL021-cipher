@@ -8,6 +8,10 @@
 body {
     background-color: #dbdbdb;
     color: black;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
 }
 
 h1 {
@@ -18,4 +22,8 @@ h1 {
 input, button {
     border: none;
     outline: none;
+}
+
+.row-content {
+    margin-top: 1rem;
 }
