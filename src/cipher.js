@@ -2,6 +2,9 @@ const cipher = {
   encode: function(offset, string) {
     var output = [];
     var result;
+    if (typeof(offset) != 'number' || typeof(string) != "string") {
+      throw new TypeError('Wrong argument types');
+    }
     for (let i = 0; i < string.length; i++) {
       //mayusculas
       if (90 >= string.charCodeAt(i) && string.charCodeAt(i) >= 65) {
@@ -20,7 +23,7 @@ const cipher = {
         output[i] = string.charCodeAt(i);
       }
     }
-    return String.fromCharCode.apply(null, output);
+    return String.fromCharCode.apply(this, output);
   },
   decode: function(offset, string) {
     //lo mismo pero con offset negativo
